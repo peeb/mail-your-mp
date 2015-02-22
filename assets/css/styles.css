@@ -1,0 +1,11 @@
+h1, h2, h3, h1 small {
+  font-weight: 800;
+}
+
+p {
+  font-size: 1.2em;
+}
+
+.btn {
+  margin: 1em;
+}
