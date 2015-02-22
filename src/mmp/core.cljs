@@ -63,17 +63,16 @@
 
 (rum/defc contact-component < rum/static [mp]
   (let [{:keys [constituency email gender name party]} mp
-        personal-pronoun (if (= "female" gender) "she" "he")
-        possessive-pronoun (if (= "female" gender) "her" "his")]
+        pronoun (if (= "female" gender) "her" "his")]
     [:div#mp.animated.bounceInDown
      [:p (<< "The MP for your constituency, ~{constituency}, "
              "is ~{name} (~{party}). ")]
      (if-not (string/blank? email)
        [:div
-        [:p (<< "~(string/capitalize personal-pronoun) can be contacted at ")
+        [:p (<< "~(string/capitalize pronoun) email address is ")
          [:a {:href (<< "mailto:~{email}")} email] "."]]
        [:p (<< "Unfortunately, however, we were unable to find "
-               "~{possessive-pronoun} email address.")])
+               "~{pronoun} email address.")])
      [:br]
      [:button.btn.btn-success
       {:on-click #(swap! state assoc :mp nil)} "Start Again"]]))
