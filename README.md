@@ -4,6 +4,8 @@
 
 A simple ClojureScript application prototype to allow [38 Degrees][38degrees] members to quickly locate and email their local constituency MP.
 
+The source code for the application can be found under `src/mmp`.
+
 ## Why?
 
 The idea is to have a simple and small, standalone web tool to lookup who your local MP is and provide her email address to contact.
