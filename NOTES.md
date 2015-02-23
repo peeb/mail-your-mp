@@ -7,6 +7,7 @@ The following improvements can be made in subsequent iterations:
 * Error feedback in logical places - ie when the mapt/yournextmp APIs can't be contacted
 * Animation to show AJAX activity
 * Facebook/Twitter integration
+* Show the postcode/constituency on a map
 
 Possible edge cases:
 
