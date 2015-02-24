@@ -57,7 +57,7 @@
      [:input {:class "text-center text-uppercase"
               :type "text"
               :default-value postcode
-              :on-input #(swap! state assoc :postcode (-> % .-target .-value))}]
+              :on-input #(swap! state assoc :postcode (.. % -target -value))}]
      [:br]
      [:button.btn.btn-success {:on-click #(get-mp! postcode)} "Find"]]))
 
