@@ -6,6 +6,8 @@ A simple ClojureScript application prototype to allow [38 Degrees][38degrees] me
 
 The source code for the application can be found under `src/mmp`.
 
+Play with it here: https://peeb.github.io/mail-your-mp/
+
 ## Why?
 
 The idea is to have a simple and small, standalone web tool to lookup who your local MP is and provide her email address to contact.
