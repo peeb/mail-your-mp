@@ -49,9 +49,8 @@
    [:h1.animated.tada "Mail Your MP"]])
 
 (rum/defc find-component < rum/static [postcode]
-  [:div.animated.bounceInDown
+  [:div.animated.fadeInUp
    [:div {:dangerouslySetInnerHTML {:__html (md->html blurb)}}]
-   [:p "Enter your postcode"]
    [:input {:class "text-center text-uppercase"
             :type "text"
             :default-value postcode
@@ -62,14 +61,14 @@
 (rum/defc contact-component < rum/static [mp]
   (let [{:keys [constituency email gender name party]} mp
         pronoun (if (= "female" gender) "her" "his")]
-    [:div#mp.animated.bounceInDown
+    [:div#mp.animated.fadeInUp
      [:p (<< "The MP for your constituency, ~{constituency}, "
              "is ~{name} (~{party}). ")]
      (if-not (string/blank? email)
        [:div
         [:p (<< "~(string/capitalize pronoun) email address is ")
          [:a {:href (<< "mailto:~{email}")} email] "."]]
-       [:p (<< "Unfortunately, however, we were unable to find "
+       [:p (<< "Unfortunately we were unable to find "
                "~{pronoun} email address.")])
      [:br]
      [:button.btn.btn-success
@@ -81,7 +80,7 @@
   (let [{:keys [mp postcode]} (rum/react state)]
     (conj [:div#rum-components.text-center]
           (header)
-          [:div.container.animated.bounceInDown
+          [:div.container.animated.fadeInUp
            [:div.row
             [:div.col-sm-10.col-sm-offset-1
              (if-not mp
