@@ -46,10 +46,10 @@
 
 (rum/defc header < rum/static [id]
   [:header.jumbotron
-   [:h1.animated.tada "Mail Your MP"]])
+   [:h1.animated.fadeIn "Mail Your MP"]])
 
 (rum/defc find-component < rum/static [postcode]
-  [:div.animated.fadeInUp
+  [:div.animated.fadeIn
    [:div {:dangerouslySetInnerHTML {:__html (md->html blurb)}}]
    [:input {:class "text-center text-uppercase"
             :type "text"
@@ -61,7 +61,7 @@
 (rum/defc contact-component < rum/static [mp]
   (let [{:keys [constituency email gender name party]} mp
         pronoun (if (= "female" gender) "her" "his")]
-    [:div#mp.animated.fadeInUp
+    [:div#mp.animated.fadeIn
      [:p (<< "The MP for your constituency, ~{constituency}, "
              "is ~{name} (~{party}). ")]
      (if-not (string/blank? email)
@@ -80,7 +80,7 @@
   (let [{:keys [mp postcode]} (rum/react state)]
     (conj [:div#rum-components.text-center]
           (header)
-          [:div.container.animated.fadeInUp
+          [:div.container.animated.fadeIn
            [:div.row
             [:div.col-sm-10.col-sm-offset-1
              (if-not mp
