@@ -28,7 +28,7 @@
 (defn get-mp! [postcode]
   (go
     (let [postcode (normalize-postcode postcode)
-          mapit-url (str "http://mapit.mysociety.org/postcode/" postcode)
+          mapit-url (str "https://mapit.mysociety.org/postcode/" postcode)
           mapit-response (<! (get-json! mapit-url))
           constituency-id (:WMC (:shortcuts mapit-response))
           yournextmp-url (<< "https://yournextmp.popit.mysociety.org/api/v0.1/"
