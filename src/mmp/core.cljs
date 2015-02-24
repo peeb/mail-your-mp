@@ -7,14 +7,13 @@
     [cljs.core.async :refer [<!]]
     [markdown.core :refer [md->html]]
     [rum]
-    [mmp.fixtures :as fixtures]
+    [mmp.fixtures :refer [blurb]]
     [mmp.tools :refer [get-json! normalize-postcode]]))
 
 (enable-console-print!)
 
 (def state
-  (atom {:content  fixtures/blurb
-         :mp       nil
+  (atom {:mp       nil
          :postcode "SW1A 0AA"}))
 
 (defn is-mp? [candidate]
@@ -49,17 +48,16 @@
   [:header.jumbotron
    [:h1.animated.tada "Mail Your MP"]])
 
-(rum/defc find-component < rum/static [data]
-  (let [{:keys [content postcode]} data]
-    [:div.animated.bounceInDown
-     [:div {:dangerouslySetInnerHTML {:__html (md->html content)}}]
-     [:p "Enter your postcode"]
-     [:input {:class "text-center text-uppercase"
-              :type "text"
-              :default-value postcode
-              :on-input #(swap! state assoc :postcode (.. % -target -value))}]
-     [:br]
-     [:button.btn.btn-success {:on-click #(get-mp! postcode)} "Find"]]))
+(rum/defc find-component < rum/static [postcode]
+  [:div.animated.bounceInDown
+   [:div {:dangerouslySetInnerHTML {:__html (md->html blurb)}}]
+   [:p "Enter your postcode"]
+   [:input {:class "text-center text-uppercase"
+            :type "text"
+            :default-value postcode
+            :on-input #(swap! state assoc :postcode (.. % -target -value))}]
+   [:br]
+   [:button.btn.btn-success {:on-click #(get-mp! postcode)} "Find"]])
 
 (rum/defc contact-component < rum/static [mp]
   (let [{:keys [constituency email gender name party]} mp
@@ -80,7 +78,7 @@
 (rum/defc main-component < rum/reactive
   "One component to rule them all"
   []
-  (let [{:keys [mp] :as data} (rum/react state)]
+  (let [{:keys [mp postcode]} (rum/react state)]
     (conj [:div#rum-components.text-center]
           (header)
           [:div.container.animated.bounceInDown
@@ -88,7 +86,7 @@
             [:div.col-sm-10.col-sm-offset-1
              (if-not mp
                [:div#find
-                (find-component data)]
+                (find-component postcode)]
                [:div#contact
                 (contact-component mp)])]]])))
 
